@@ -44,8 +44,10 @@
 	$list->say();
 	echo '<br />';
 	$list->say();
+	
 	echo '<br />';
 	$list->say();
 	echo '<br />';
+	
 	
 ?>
