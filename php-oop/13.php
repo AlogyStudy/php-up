@@ -17,8 +17,6 @@ class Human {
 
 class Stu extends Human {
 	public function subTell() {
-		var_dump($this);
-		die;
 		echo $this->wife;
 	}
 }
