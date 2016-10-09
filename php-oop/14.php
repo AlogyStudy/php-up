@@ -18,7 +18,6 @@ class Human {
 
 class Stu extends Human {
 	private $wife = 123;
-	
 	public $height = 180;
 	
 	public function subTell() {
