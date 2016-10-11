@@ -57,5 +57,4 @@
 	
 	var_dump($mysql->autoInsert());
 	
-	
 ?>
