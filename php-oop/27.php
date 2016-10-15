@@ -57,11 +57,45 @@
 		 * 第四步：通过内部的static方法实例化，并且，把实例保存在类内部的静态属性上.
 		 */  
 		 
- 	  class Single {
- 	  	
+// 	  class Single {
+// 	  	
+//			static protected $ins = NULL;
+//			
+//	  	protected function __construct() {}
+//			
+//			static public function getInstance() {
+//				
+//				if ( self::$ins instanceof self ) {
+//					return self::$ins;	
+//				}
+//				
+//				return self::$ins = new self();
+//				
+//			}
+//			
+//	  }
+//		
+//		$s1 = Single::getInstance();
+//		$s2 = Single::getInstance();
+//		
+//		var_dump($s1);
+//		var_dump($s2);
+//		
+//		class Test extends Single {
+//			public function __construc() {
+//				parent::__construct();
+//			}
+//		}
+		
+//		final 		
+
+		class Single {
+ 	  	public $hash; // 随机数
 			static protected $ins = NULL;
-			
-	  	protected function __construct() {}
+				
+	  	final protected function __construct() {
+	  		$this->hash = mt_rand(1, 999); 
+	  	}
 			
 			static public function getInstance() {
 				
@@ -82,10 +116,9 @@
 		var_dump($s2);
 		
 		class Test extends Single {
-			public function __construc() {
-				parent::__construct();
+			public function getInstance() {
+				
 			}
 		}
 		
-//		final 		
 ?>
