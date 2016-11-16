@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div onclick="change()" style="width: 100px; height: 50px; background: pink;"></div>
+		
+		验证码：<input type="text" name="vcode" /> <img src"yzm.php" />
+		
+		<script type="text/javascript">
+			
+			function change() {
+				
+				var oImg = document.querySelector('img');
+				
+				oImg.src = 'yzm.php?' + Date.parse( new Date() );
+				
+			}
+			
+		</script>
+		
+	</body>
+</html>
