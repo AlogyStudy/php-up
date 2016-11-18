@@ -8,15 +8,18 @@
 		
 		<div onclick="change()" style="width: 100px; height: 50px; background: pink;"></div>
 		
-		验证码：<input type="text" name="vcode" /> <img src"yzm.php" />
+		验证码：<input type="text" name="vcode" /> <img src"yzm.php" onclick="change(this)" />
+		
+		验证码：<input type="text" name="vcode" /> <img src="yzm2.php" onclick="change(this)" />
 		
 		<script type="text/javascript">
 			
-			function change() {
+			function change( yzm ) {
 				
-				var oImg = document.querySelector('img');
+//				var oImg = document.querySelector('img');
 				
-				oImg.src = 'yzm.php?' + Date.parse( new Date() );
+				yzm.src = yzm.src + '?_s=' + Date.parse( new Date() );
+				
 				
 			}
 			
