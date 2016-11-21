@@ -46,17 +46,11 @@
 	$x = 360 - $g - $c;
 //	echo $g, $c, $x; // 120 180 60
 
-//	$gaozhong = 150;
-//	$chuzhong = 100;
-//	$xiaoxue = 50;
-
-
-	imagefilledarc($im, 200, 200, 200, 200, 0, $g, $red, 0+4);
-	imagefilledarc($im, 200, 200, 200, 200, $g, $c, $green, 0+4);
-	imagefilledarc($im, 200, 200, 200, 200, $c, $x, $blue, 0+4);
-	
-//	imagefilledarc($image, $cx, $cy, $width, $height, $start, $end, $color, $style)
-	
+//	imagefilledarc($im, 200, 200, 200, 200, $g, 0, $blue, 0+4);
+//	imagefilledarc($im, 200, 200, 200, 200, $g, $c, $red, 0+4);
+//	imagefilledarc($im, 200, 200, 200, 200, $c+$x, $g, $green, 0+4);
+		
+			
 	
 	imagefill($im, 0, 0, $gray);
 	
