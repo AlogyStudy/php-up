@@ -1,7 +1,6 @@
 <meta charset="UTF-8"/>
 <?php
 	
-	
 	$file = './123.jpg';
 	
 	$im = imagecreatefromjpeg($file);
