@@ -77,7 +77,27 @@
 			$wIm = $wFun($waeterInfo); // 创建水印画布
 			
 			// 处理水印的位置 计算粘贴的坐标
-			
+			switch ($pos) {
+				case 0: // 左上角
+					$posX = 0;
+					$posY = 0;
+					break;
+				case 1: // 右上角
+					$posX = $dstInfo['width'] - $waeterInfo['width'];
+					$poxY = 0;
+					break;
+				case 2: // 居中
+					$posX = ($dstInfo['width'] - $waeterInfo['width']) / 2;
+					$posY = ($dstInfo['height'] - $waeterInfo['width'])
+					break; 
+				case 3: // 左下角
+					break;
+				case 4: // 右下角
+					break;
+				default:
+					
+					break;
+			}
 									
 			// 加水印
 			imagecopymerge($dIm, $wIm, $dst_x, $dst_y, 0, 0, $w['width'], $w['height'], $alpha);						
