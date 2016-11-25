@@ -45,11 +45,11 @@
 		 * @param {String} $water 水印小图片
 		 * @param {String} $save 存储图片位置   默认替换原始图
 		 * @param {Int} $alpha 透明度
-		 * @param {Int} $position 水印位置
-		 * @return {Mixin} Boolean
+		 * @param {Int} $pos 水印位置
+		 * @return {Boolean} 添加水印是否成功
 		 */
-		public static function addWater($dst, $water, $save=NULL, $alpha=50, $position) {
-			
+		public static function addWater($dst, $water, $save=NULL, $pos=4, $alpha=50) {
+			 
 			// 保证二个文件是否存在
 			if(!file_exists($dst) || !file_exists($water)) {
 				return false;
@@ -74,7 +74,7 @@
 			
 			// 动态加载函数创建画布
 			$dIm = $dFun($dst); // 创建待操作的画布
-			$wIm = $wFun($waeterInfo); // 创建水印画布
+			$wIm = $wFun($water); // 创建水印画布
 			
 			// 处理水印的位置 计算粘贴的坐标
 			switch ($pos) {
@@ -88,23 +88,58 @@
 					break;
 				case 2: // 居中
 					$posX = ($dstInfo['width'] - $waeterInfo['width']) / 2;
-					$posY = ($dstInfo['height'] - $waeterInfo['width'])
+					$posY = ($dstInfo['height'] - $waeterInfo['height']) / 2;
 					break; 
 				case 3: // 左下角
+					$posX = 0;
+					$posY = $dstInfo['height'] - $waeterInfo['height'];
 					break;
 				case 4: // 右下角
+					$posX = $dstInfo['width'] - $waeterInfo['width'];
+					$posY = $dstInfo['height'] - $waeterInfo['height'];
 					break;
-				default:
-					
+				
+				case 5: // 底部中间
+					$posX = ($dstInfo['width'] - $waeterInfo['width']) / 2;
+					$posY = $dstInfo['height'] - $waeterInfo['height'];
 					break;
 			}
 									
 			// 加水印
-			imagecopymerge($dIm, $wIm, $dst_x, $dst_y, 0, 0, $w['width'], $w['height'], $alpha);						
+			imagecopymerge($dIm, $wIm, $posX, $posY, 0, 0, $waeterInfo['width'], $waeterInfo['height'], $alpha);
 						
+			// 保存
+			if (!$save) {
+				$save = $dst;
+				unlink($dst); // 删除原图片
+			}
+			
+			// 生成水印
+			$createFun = 'image' . $dstInfo['ext'];
+			$createFun($dIm, $save);
+				
+			imagedestroy($dIm);
+			imagedestroy($wIm);
+			
+			return true;			
 		}	
 		
+		/**
+		 * thumb 生成缩略图
+		 * @param {String} $dst 原始路径
+		 * @param {String} $save 保存路径
+		 * @param {Int} $width 缩略图 宽度
+		 * @param {Int} $height 缩略图 高度
+		 */
+		public static function thumb( $dst, $save=NULL, $width=200, $height=200 ) {
+			
+		} 
+		
 	}
-
+	
+	echo ImageTool::addWater('./ellipse.jpeg', './hao.jpg', 'pink.jpg') ? 'ok' : 'no';
+	echo ImageTool::addWater('./ellipse.jpeg', './hao.jpg', 'pink1.jpg', 2) ? 'ok' : 'no';
+	echo ImageTool::addWater('./ellipse.jpeg', './hao.jpg', 'pink2.jpg', 5) ? 'ok' : 'no';
+	
 ?>
 
