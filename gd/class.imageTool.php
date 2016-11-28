@@ -12,6 +12,12 @@
 		
 	// 水印：把指定的水印复制到目标上，并加透明效果
 	// 缩略图：把大图片复制到小尺寸画面上		
+	
+	// Mysql class [mysql 类]
+	// fileup class [文件上传类]
+	// session-cookie class [session-cookie 类]
+	// paging class [分页class]
+	// imageTool class [图片处理类]
 		
 	class ImageTool {
 		
@@ -125,21 +131,71 @@
 		}	
 		
 		/**
-		 * thumb 生成缩略图
+		 * thumb 生成缩略图 
+		 * 等比例缩放，两边留白
 		 * @param {String} $dst 原始路径
 		 * @param {String} $save 保存路径
 		 * @param {Int} $width 缩略图 宽度
 		 * @param {Int} $height 缩略图 高度
+		 * @return {Boolen} 生成缩略图是否成功  
 		 */
 		public static function thumb( $dst, $save=NULL, $width=200, $height=200 ) {
+			
+			// 判断路径是否存在
+			if ( !file_exists($dst) ) {
+				return false;
+			}
+			
+			$dinfo = self::imageInfo($dst);
+			// 图片信息为假
+			if ( $dinfo == false ) {
+				return false;
+			}
+			
+			// 计算缩放比例
+			$calc = min($width / $dinfo['width'], $height / $dinfo['height']);
+			
+			// 创建原始图画布
+			$dfunc = 'imagecreatefrom' . $dinfo['ext'];
+			$dim = $dfunc($dst);
+			
+			// 创建缩略画布
+			$tim = imagecreatetruecolor($width, $height);
+			
+			// 创建白色填充缩略画布
+			$while = imagecolorallocate($tim, 255, 255, 255);
+			
+			imagefill($tim, 0, 0, $while);
+			
+			// 复制并缩略
+			$dwidth = (int)$dinfo['width'] * $calc;
+			$dheight = (int)$dinfo['height'] * $calc;
+			
+			$paddingx = (int)($width - $dwidth) / 2;
+			$paddingy = (int)($height - $dheight) / 2 ;
+			imagecopyresampled($tim, $dim, $paddingx, $paddingy, 0, 0, $dwidth, $dheight, $width, $height);
+			
+			// 保存图片
+			if ( !$save ) {
+				$save = $dst;
+				unlink($dst);
+			}
+			
+			$createfun = 'image' . $dinfo['ext'];
+			$createfun($tim, $save);
+			
+			// 销毁
+			imagedestroy($dim);
+			imagedestroy($tim);
+			return true;
 			
 		} 
 		
 	}
-	
-	echo ImageTool::addWater('./ellipse.jpeg', './hao.jpg', 'pink.jpg') ? 'ok' : 'no';
-	echo ImageTool::addWater('./ellipse.jpeg', './hao.jpg', 'pink1.jpg', 2) ? 'ok' : 'no';
-	echo ImageTool::addWater('./ellipse.jpeg', './hao.jpg', 'pink2.jpg', 5) ? 'ok' : 'no';
+
+	echo ImageTool::thumb('./hao.jpg', './haohao1.png', 200, 200) ? 'ok' : 'no';
+	echo ImageTool::thumb('./hao.jpg', './haohao2.png', 300, 200) ? 'ok' : 'no';
+	echo ImageTool::thumb('./hao.jpg', './haohao3.png', 200, 300) ? 'ok' : 'no';
 	
 ?>
 
