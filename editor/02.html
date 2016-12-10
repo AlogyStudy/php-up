@@ -13,7 +13,14 @@
 			3： 如何与自己的系统整合
 		</pre>
 		
-		<textarea name="goods_desc" id="goods_desc" rows="30" cols="50"></textarea>
+		<!--<form action="02.php" method="post">
+			<textarea name="goods_desc" id="goods_desc" rows="30" cols="50"></textarea>
+			<input type="submit" value="提交"/>
+		</form>-->
+		
+		<textarea name="goods_desc" id="goods_desc" rows="" cols=""></textarea>
+		<input type="button" id="tijiao" name="" value="提交" />
+		
 		
 		<script src="ueditor1_4_3_2-utf8-php/utf8-php/ueditor.config.js" type="text/javascript" charset="utf-8"></script>
 		<script src="ueditor1_4_3_2-utf8-php/utf8-php/ueditor.all.js" type="text/javascript" charset="utf-8"></script>
@@ -32,9 +39,10 @@
 			window.UEDITOR_CONFIG.initialFrameHeight = 300; // 高度
 			
 			window.UEDITOR_CONFIG.initialContent = '欢迎~~';  // 初始值
-			
 
 		</script>
+		
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 		
 		<script type="text/javascript">
 //			var editor = new UE.ui.Editor(			{
@@ -49,8 +57,16 @@
 
 			var editor = new UE.ui.Editor();	
 			editor.render('goods_desc');
+			
+//			http://fex.baidu.com/ueditor/#api-common
+
+			// 常用API
+			$('#tijiao').click(function () {
+				console.log( editor.getContentTxt() );  // 获取纯文本
+				console.log( editor.getPlainTxt() ); // 获取
+			});
+			
 		</script>
-		
 		
 	</body>
 </html>
