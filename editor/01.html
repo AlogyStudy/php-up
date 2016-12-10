@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			
+			div {
+				width: 500px;
+				height: 300px;
+				border: tan 1px solid;
+				outline: none;
+			}
+			 
+		</style>
+	</head>
+	<body>
+		
+		<h1>编辑器</h1>
+		<p>
+			插入一个iframe,并利用网页中的`contenteditable`属性来控制，使得iframe 可以编辑，再利用JavaScript来完成 变色，上传图片，等效果.
+			最后再获取该区域的内容即可.
+		</p>
+		
+<pre>
+	常见的编辑器
+	老牌：
+	fckEditor 改名为：CKDditor
+	kindEditor
+	国内：
+	ewebEditor (淘宝)
+	UEditor(百度)
+</pre>
+		
+		<div contenteditable="true">
+			HELLO Editor
+		</div>
+		
+		<input type="button" onclick="t()" value="获取内容" />
+		
+		<script type="text/javascript">
+			
+			function t() {
+				var d = document.getElementsByTagName('div')[0];
+				alert(d.innerHTML);
+			}
+			
+		</script>
+		
+	</body>
+</html>

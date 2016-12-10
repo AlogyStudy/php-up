@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<pre>
+			编辑器步骤
+			1： 如何引入
+			2： 如何个性化配置
+			3： 如何与自己的系统整合
+		</pre>
+		
+		<textarea name="goods_desc" id="goods_desc" rows="30" cols="50"></textarea>
+		
+		<script src="ueditor1_4_3_2-utf8-php/utf8-php/ueditor.config.js" type="text/javascript" charset="utf-8"></script>
+		<script src="ueditor1_4_3_2-utf8-php/utf8-php/ueditor.all.js" type="text/javascript" charset="utf-8"></script>
+		<script src="ueditor1_4_3_2-utf8-php/utf8-php/lang/zh-cn/zh-cn.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			
+			// 配置 ueditor.config 选项
+			
+			window.UEDITOR_CONFIG.toolbars = [[
+          'fullscreen', 'source', '|', 'undo', 'redo', '|',
+          'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
+      ]]; // 需要的功能
+      
+			window.UEDITOR_CONFIG.initialFrameWidth = 750; // 宽度
+			window.UEDITOR_CONFIG.initialFrameHeight = 300; // 高度
+			
+			window.UEDITOR_CONFIG.initialContent = '欢迎~~';  // 初始值
+			
+
+		</script>
+		
+		<script type="text/javascript">
+//			var editor = new UE.ui.Editor(			{
+//				toolbars: [[
+//        'fullscreen', 'source', '|', 'undo', 'redo', '|',
+//        'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
+//    ]],
+//    initialFrameWidth: 750,
+//    initialFrameHeight: 350
+//			}
+//);
+
+			var editor = new UE.ui.Editor();	
+			editor.render('goods_desc');
+		</script>
+		
+		
+	</body>
+</html>
