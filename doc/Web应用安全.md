@@ -199,3 +199,31 @@ XSS攻击的危害
 // 获取cookie
 ?id=1'<script>alert(document.cookie)</script> // 通过一段脚本程序（包括document.cookie）将用户的信息发送到远程的恶意网站，恶意网站专门接收信息。(DVWA)
 ```
+> 跨站请求伪造（CSRF）
+
+影响关键处理被恶意使用
+
+
+> 前端攻击防御
+
+- 代码层防御
+- 第三方防御手段
+
+XSS场景：web应用等
+CSRF场景：内部网络（路由器），Web应用等
+
+代码层防御：
+1. 通用防XSS脚本 (转义，过滤的方式)
+2. 安全函数
+	PHP相关安全函数（htmlspecialchars,stripslashes）
+3. htmlspecialchars转义的字符
+4. CSRF防御
+	验证referer（referer可以伪造）
+	加token认证
+
+第三方防御手段：
+1. 软件版
+	mod_security
+	互联网安全防护产品（阿里云盾，安全宝等同类型产品）	
+2. 硬件
+	web应用防火墙
