@@ -280,3 +280,50 @@ if ($_GET['page']) {
 2. 避免文件名中包含目录名
 3. 限制包含的文件范围
 4. 对于远程文件包含，设置`php.ini`配置文件中`allow_url_include = off`	
+
+## 安全加固
+
+> Apache的安全加固
+
+1. 默认配置
+2. 目录权限控制
+3. 通过配置文件进行权限控制
+```
+// 文件类型
+<Files ~ ".inc$">
+    Order allow,deny
+    Deny from all
+</Files>
+// 目录访问控制
+<Directory ~ "~/var/www/admin">
+    Order allow,deny
+    Deny from all
+</Direactory>
+// 文件类型访问控制
+<FilesMatch .(txt)$>
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+```
+4. 修改apache源代码，重新编译
+5. chroot_jail环境
+
+
+> PHP的安全加固
+
+1. disable_functions // 禁用一些函数
+2. open_basedir // 访问的目录
+3. safe_mode // 安全模式
+
+修改`php.ini`中的配置
+
+
+> Mysql的安全加固
+
+1. 空口令
+2. 弱口令
+3. 应用运行权限
+    linux 系统下默认低权限，而windows系统下，默认都是`system`权限
+4. 数据库用户权限
+    应用权限过大，导致跨库
+
